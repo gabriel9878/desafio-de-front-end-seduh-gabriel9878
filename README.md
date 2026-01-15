@@ -1,83 +1,36 @@
-## ⚙️ Desafio de Front-end
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
----
+## Getting Started
 
-### 📝 Descrição do Projeto
+First, run the development server:
 
-Desenvolver um **Web Application** que permita aos usuários **listar** e **selecionar** uma das cidades pré-definidas para, em seguida, exibir uma tela de **detalhes** com as **informações climáticas** da cidade escolhida, utilizando uma **API pública** de dados meteorológicos.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### 📍 Cidades para Listagem
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-O aplicativo deve listar obrigatoriamente as seguintes cidades e seus respectivos países:
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-* **Dallol** (Etiópia - ET)
-* **Fairbanks** (Estados Unidos - US)
-* **Londres** (Reino Unido - GB)
-* **Recife** (Brasil - BR)
-* **Vancouver** (Canadá - CA)
-* **Yakutsk** (Rússia - RU)
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-### ☁️ Integração e Dados Climáticos
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-* **APIs Sugeridas:**
-    * [OpenWeatherMap - Current Weather](https://www.openweathermap.org/current)
-    * [WeatherAPI](https://www.weatherapi.com)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-* **Layout (Figma):**
-    * [Link do Layout](https://www.figma.com/design/HNu9zrHdknRvoQyVPvk08g/Sem-t%C3%ADtulo?node-id=0-1&t=XxZtZTWhxKPbfuKY-1)
+## Deploy on Vercel
 
-* **Horários de Referência:** Para exibição de temperaturas específicas do dia, use os seguintes horários (conforme o fuso horário da cidade):
-    * **Dawn (Amanhecer):** $03:00$
-    * **Morning (Manhã):** $09:00$
-    * **Afternoon (Tarde):** $15:00$
-    * **Night (Noite):** $21:00$
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-* **Ícones:** Utilize os ícones fornecidos no layout para representar as condições climáticas de forma coerente.
-
----
-
-### 💻 Requisitos Técnicos e de Avaliação
-
-#### 1. Estrutura e Preparação
-* **Fork do Repositório:** Realizar o fork deste repositório para iniciar o desenvolvimento.
-
-#### 2. Hospedagem
-* O projeto final deve ser publicado e acessível através de uma das seguintes plataformas:
-    * **Netlify**
-    * **Vercel**
-
-#### 3. Frontend e Frameworks
-* **Frameworks Opcionais (Preferência na Ordem):**
-    1.  **React** com **Next.js**
-    2.  **React** com **Vite**
-    3.  **Angular**
-
-#### 4. Design e Responsividade
-* **Fidelidade ao Layout:** A implementação deve seguir rigorosamente o design fornecido no link do Figma.
-* **Responsividade:** O layout deve se adaptar corretamente a **3 breakpoints** principais:
-    * **Smartphone**
-    * **Tablet**
-    * **Desktop**
-
-#### 5. Qualidade de Código
-* **Testes Unitários:** Implementar testes unitários para garantir a funcionalidade e a qualidade do código.
-
----
-
-### ⭐ Diferenciais (Plus)
-
-* **Containerização:** Opcionalmente, configure o projeto para **rodar através de um container Docker**.
-
----
-
-### 🚀 Entrega
-
-Após finalizar o projeto e publicá-lo, responda ao nosso contato enviando o **link do repositório (fork)** e o **link da aplicação hospedada**.
-
-**Boa sorte!**
-
----
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
