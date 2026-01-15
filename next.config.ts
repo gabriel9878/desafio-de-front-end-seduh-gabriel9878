@@ -4,7 +4,6 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  // Se um dia usar next/image, isso garante que funcione no export estático:
   images: {
     unoptimized: true,
   },
