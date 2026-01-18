@@ -10,10 +10,10 @@ O foco principal foi entregar uma experiência consistente entre diferentes disp
 ## 🔗 Links
 
 - **Aplicação em produção:**  
-  https://<sua-url-na-vercel>.vercel.app
+  https://desafio-de-front-end-seduh-gabriel9878.vercel.app
 
 - **GitHub Pages (documentação / README):**  
-  https://<seu-usuario>.github.io/<seu-repo>/
+  https://<gabriel9878.github.io/desafio-de-front-end-seduh/
 
 ---
 

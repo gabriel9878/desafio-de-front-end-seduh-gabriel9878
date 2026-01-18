@@ -2,15 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CITIES, type CityConfig } from "@/app/config/cities";
 import { WeatherDetailsPage } from "@/app/components/WeatherDetailsPage";
-import {
-  CloudSun,
-  CloudMoon,
-  CloudRain,
-  CloudSnow,
-  CloudFog,
-  Sun,
-  MoonStar,
-} from "lucide-react";
 
 const API_KEY = process.env.WEATHER_API_KEY;
 
@@ -37,52 +28,6 @@ interface WeatherData {
     }>;
   };
 }
-
-const getLucideIconForCondition = (code: number, isDay: number) => {
-  const dayTime = isDay === 1;
-
-  if (code === 1000) {
-    return dayTime ? Sun : MoonStar;
-  }
-
-  if ([1003, 1006, 1009].includes(code)) {
-    return dayTime ? CloudSun : CloudMoon;
-  }
-
-  if ([1030, 1135, 1147].includes(code)) {
-    return CloudFog;
-  }
-
-  if (
-    [
-      1063, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198,
-      1201, 1204, 1207, 1240, 1243, 1246, 1087, 1273, 1276, 1279, 1282,
-    ].includes(code)
-  ) {
-    return CloudRain;
-  }
-
-  if (
-    [
-      1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237,
-      1249, 1252, 1255, 1258, 1261, 1264,
-    ].includes(code)
-  ) {
-    return CloudSnow;
-  }
-
-  return dayTime ? CloudSun : CloudMoon;
-};
-
-const getBgColor = (weather: WeatherData | null) => {
-  if (!weather) return "bg-black";
-  const code = weather.current.condition.code;
-  const isDay = weather.current.is_day;
-
-  if (code == 1000 && isDay === 1) return "bg-[#2CAEFF]";
-  if (code == 1000 && isDay === 0) return "bg-[#1A2C42]";
-  return "bg-[#CCCCCC] text-gray-800";
-};
 
 // Necessário para `output: "export"` em rotas dinâmicas
 export function generateStaticParams() {

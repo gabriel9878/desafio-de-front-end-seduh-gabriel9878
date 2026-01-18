@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { ArrowLeft, CloudSun, CloudMoon, CloudRain, CloudSnow, CloudFog, Sun, MoonStar } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 
@@ -33,6 +34,51 @@ interface WeatherDetailsPageProps {
   setSelectedCity?: Dispatch<SetStateAction<string | null>>;
 }
 
+const getBgColor = (weather: WeatherData) => {
+  const code = weather.current.condition.code;
+  const isDay = weather.current.is_day;
+
+  if (code === 1000 && isDay === 1) return "bg-[#2CAEFF]";
+  if (code === 1000 && isDay === 0) return "bg-[#1A2C42]";
+  return "bg-[#CCCCCC] text-gray-800";
+};
+
+const getLucideIconForCondition = (code: number, isDay: number) => {
+  const dayTime = isDay === 1;
+
+  if (code === 1000) {
+    return dayTime ? Sun : MoonStar;
+  }
+
+  if ([1003, 1006, 1009].includes(code)) {
+    return dayTime ? CloudSun : CloudMoon;
+  }
+
+  if ([1030, 1135, 1147].includes(code)) {
+    return CloudFog;
+  }
+
+  if (
+    [
+      1063, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198,
+      1201, 1204, 1207, 1240, 1243, 1246, 1087, 1273, 1276, 1279, 1282,
+    ].includes(code)
+  ) {
+    return CloudRain;
+  }
+
+  if (
+    [
+      1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237,
+      1249, 1252, 1255, 1258, 1261, 1264,
+    ].includes(code)
+  ) {
+    return CloudSnow;
+  }
+
+  return dayTime ? CloudSun : CloudMoon;
+};
+
 export function WeatherDetailsPage({
   selectedCity,
   weather,
@@ -41,52 +87,8 @@ export function WeatherDetailsPage({
   const current = weather.current;
   const today = weather.forecast.forecastday[0];
 
-  const getBgColor = () => {
-    const code = weather.current.condition.code;
-    const isDay = weather.current.is_day;
-
-    if (code == 1000 && isDay === 1) return "bg-[#2CAEFF]";
-    if (code == 1000 && isDay === 0) return "bg-[#1A2C42]";
-    return "bg-[#CCCCCC] text-gray-800";
-  };
-
-  const getLucideIconForCondition = (code: number, isDay: number) => {
-    const dayTime = isDay === 1;
-
-    if (code === 1000) {
-      return dayTime ? Sun : MoonStar;
-    }
-
-    if ([1003, 1006, 1009].includes(code)) {
-      return dayTime ? CloudSun : CloudMoon;
-    }
-
-    if ([1030, 1135, 1147].includes(code)) {
-      return CloudFog;
-    }
-
-    if (
-      [
-        1063, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198,
-        1201, 1204, 1207, 1240, 1243, 1246, 1087, 1273, 1276, 1279, 1282,
-      ].includes(code)
-    ) {
-      return CloudRain;
-    }
-
-    if (
-      [
-        1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237,
-        1249, 1252, 1255, 1258, 1261, 1264,
-      ].includes(code)
-    ) {
-      return CloudSnow;
-    }
-
-    return dayTime ? CloudSun : CloudMoon;
-  };
-
-  const textColor = getBgColor().includes("bg-[#CCCCCC]") ? "text-gray-800" : "text-white";
+  const bgColor = getBgColor(weather);
+  const textColor = bgColor.includes("bg-[#CCCCCC]") ? "text-gray-800" : "text-white";
 
   const timePoints = [
     { label: "Dawn", index: 3 },
@@ -98,8 +100,19 @@ export function WeatherDetailsPage({
   const displayMax = Math.max(current.temp_c, today.day.maxtemp_c);
   const displayMin = Math.min(current.temp_c, today.day.mintemp_c);
 
+  // Elemento do ícone principal da condição atual, criado uma vez por render
+  const conditionIconElement = React.createElement(
+    getLucideIconForCondition(current.condition.code, current.is_day),
+    {
+      size: 90,
+      className: "sm:h-[120px] sm:w-[120px] md:h-[140px] md:w-[140px]",
+    }
+  );
+
   return (
-    <main className={`min-h-screen ${getBgColor()} ${textColor} flex flex-col items-center justify-center p-6 transition-colors duration-500`}>
+    <main
+      className={`min-h-screen ${bgColor} ${textColor} flex flex-col items-center justify-center p-6 transition-colors duration-500`}
+    >
       {setSelectedCity && (
         <nav className="w-full max-w-md flex justify-start mb-4" aria-label="Navegação">
           <button
@@ -112,7 +125,7 @@ export function WeatherDetailsPage({
         </nav>
       )}
 
-  <header className="text-center mb-8">
+      <header className="text-center mb-8">
         <h1 className="text-4xl font-light mb-1">{selectedCity}</h1>
         <p className="text-lg opacity-80">{current.condition.text}</p>
       </header>
@@ -133,18 +146,10 @@ export function WeatherDetailsPage({
           <span>↑ {Math.round(displayMax)}°</span>
           <span>↓ {Math.round(displayMin)}°</span>
         </div>
-  </section>
+      </section>
 
       <section className="mb-10 sm:mb-12" aria-label="Condição climática atual">
-        {(() => {
-          const Icon = getLucideIconForCondition(current.condition.code, current.is_day);
-          return (
-            <Icon
-              size={90}
-              className="sm:h-[120px] sm:w-[120px] md:h-[140px] md:w-[140px]"
-            />
-          );
-        })()}
+        {conditionIconElement}
       </section>
 
       <section
@@ -153,7 +158,7 @@ export function WeatherDetailsPage({
       >
         {timePoints.map((point, index) => {
           const hourData = today.hour[point.index];
-          const Icon = getLucideIconForCondition(hourData.condition.code, hourData.is_day);
+          const HourIcon = getLucideIconForCondition(hourData.condition.code, hourData.is_day);
 
           return (
             <article
@@ -163,7 +168,7 @@ export function WeatherDetailsPage({
               }`}
             >
               <span className="text-xs opacity-70 mb-2">{point.label}</span>
-              <Icon size={28} className="mb-1" />
+              <HourIcon size={28} className="mb-1" />
               <span className="text-sm font-medium">{Math.round(hourData.temp_c)}°C</span>
             </article>
           );
