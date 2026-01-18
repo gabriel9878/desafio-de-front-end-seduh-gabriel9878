@@ -89,11 +89,14 @@ export function WeatherDetailsPage({
   const textColor = getBgColor().includes("bg-[#CCCCCC]") ? "text-gray-800" : "text-white";
 
   const timePoints = [
-    { label: "Dawn", index: 6 },
-    { label: "Morning", index: 10 },
+    { label: "Dawn", index: 3 },
+    { label: "Morning", index: 9 },
     { label: "Afternoon", index: 15 },
     { label: "Night", index: 21 },
   ];
+
+  const displayMax = Math.max(current.temp_c, today.day.maxtemp_c);
+  const displayMin = Math.min(current.temp_c, today.day.mintemp_c);
 
   return (
     <main className={`min-h-screen ${getBgColor()} ${textColor} flex flex-col items-center justify-center p-6 transition-colors duration-500`}>
@@ -127,8 +130,8 @@ export function WeatherDetailsPage({
           </span>
         </div>
         <div className="flex flex-col absolute right-[-0px] top-[64%] text-xs opacity-80">
-          <span>↑ {Math.round(today.day.maxtemp_c)}°</span>
-          <span>↓ {Math.round(today.day.mintemp_c)}°</span>
+          <span>↑ {Math.round(displayMax)}°</span>
+          <span>↓ {Math.round(displayMin)}°</span>
         </div>
   </section>
 

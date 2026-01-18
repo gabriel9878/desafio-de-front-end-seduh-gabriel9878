@@ -36,7 +36,7 @@ export function CitySelectionPage({ cities }: CitySelectionPageProps) {
           <Link
             key={city.label}
             href={`/city/${city.slug}`}
-            className="text-sm font-bold hover:text-blue-400 transition-colors uppercase tracking-wider"
+            className="text-sm font-bold hover:text-blue-400 transition-colors tracking-wider capitalize"
           >
             {city.label}
           </Link>
