@@ -12,7 +12,7 @@ import {
   MoonStar,
 } from "lucide-react";
 
-const API_KEY = "07e29eaa30e74ae6b3f10722261501";
+const API_KEY = process.env.WEATHER_API_KEY;
 
 interface WeatherData {
   location: { name: string; country: string };
