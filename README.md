@@ -13,7 +13,7 @@ O foco principal foi entregar uma experiência consistente entre diferentes disp
   https://desafio-de-front-end-seduh-gabriel9878.vercel.app
 
 - **GitHub Pages (documentação / README):**  
-  https://<gabriel9878.github.io/desafio-de-front-end-seduh/
+  https://gabriel9878.github.io/desafio-de-front-end-seduh/
 
 ---
 
